@@ -15,7 +15,7 @@ public class Example2 {
 		space.setLayout(new FlowLayout());
 		((FlowLayout) space.getLayout()).setAlignment(FlowLayout.TRAILING);
 		
-		NiLabel label = new NiLabel("space " + space.getWidth() + "x" + space.getHeight() );
+		NiLabel label = new NiLabel("Head");
 		label.setFont(new Font("Arial", Font.BOLD, 24));
 		label.setForeground(Color.darkGray);
 		label.setBackground(Color.yellow);
@@ -47,6 +47,23 @@ public class Example2 {
 		rectangle2.setBackground(Color.yellow);	
 		rectangle2.setPreferredSize(new Dimension(30,30));
 		space.add(rectangle2);
+
+		NiEllipse ellipse3 = new NiEllipse();
+		ellipse3.setBackground(Color.black);	
+		ellipse3.setPreferredSize(new Dimension(30,30));
+		space.add(ellipse3);
+		
+		NiRectangle rectangle3 = new NiRectangle();
+		rectangle3.setBackground(Color.yellow);	
+		rectangle3.setPreferredSize(new Dimension(30,30));
+		space.add(rectangle3);
+		
+		NiLabel label2 = new NiLabel("Tail");
+		label2.setFont(new Font("Arial", Font.BOLD, 24));
+		label2.setForeground(Color.darkGray);
+		label2.setBackground(Color.yellow);
+		space.add(label2);
+
 
 		space.openInWindow();
 	
