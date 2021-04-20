@@ -32,7 +32,7 @@ public class NiPolyLine extends JComponent implements NiBasicComponent {
 	public Color defaultColor() {
 		return Color.cyan;
 	}
-	
+
 	public void addPoint(Point p) {
 		points.add(p);
 	}
@@ -41,11 +41,19 @@ public class NiPolyLine extends JComponent implements NiBasicComponent {
 		points.remove(p);
 	}
 
+	public void paint(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g.create();
+		//g2d.clip(this.getClipShape());
+		super.paint(g2d);
+		g2d.dispose();
+	}
+		
 	@Override
 	public void paintComponent(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-		Stroke previousStroke = g2d.getStroke();
-		Color previousColor = g2d.getColor();
+		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.setStroke(this.stroke);
+		super.paintComponent(g2d);
+		
 		int[] x = new int[points.size()];
 		int[] y = new int[points.size()];
 		int idx = 0;
@@ -56,18 +64,16 @@ public class NiPolyLine extends JComponent implements NiBasicComponent {
 			y[idx] = curr.y;
 			idx++;
 		}
-		g2d.setStroke(stroke);
-		g2d.setColor(this.getBackground());
 		g2d.drawPolyline(x, y, idx);
-		g2d.setColor(previousColor);
-		g2d.setStroke(previousStroke);
+
+		g2d.dispose();
 	}
 
 	public void setStroke(Stroke stroke) {
 		this.stroke = stroke;
 	}
 
-	public void setWidth(float w) {
+	public void setStrokeWidth(float w) {
 		this.setStroke(new BasicStroke(w, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_ROUND));
 	}
 

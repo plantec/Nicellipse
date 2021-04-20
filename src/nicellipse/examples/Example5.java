@@ -9,8 +9,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import nicellipse.component.NiEllipse;
@@ -20,10 +18,10 @@ import nicellipse.component.NiSpace;
 public class Example5 {
 
 	public static void main(String[] args) {
-		int population = 10000;
+		int population = 5000;
 		Random x = new Random();
 		NiSpace space = new NiSpace("It makes me mad", new Dimension(800, 600));
-		JPanel gb = new JPanel();
+		NiRectangle gb = new NiRectangle();
 		gb.setLayout(null);
 		gb.setBounds(10, 10, 780, 580);
 		gb.setBackground(Color.lightGray);
@@ -38,7 +36,7 @@ public class Example5 {
 			int oy = x.nextInt(height);
 			NiEllipse oval = new NiEllipse();
 			oval.setBackground(new Color((int) (Math.random() * 0x1000000)));
-			oval.setBounds(ox, oy, x.nextInt(30), x.nextInt(30));
+			oval.setBounds(ox, oy, x.nextInt(50), x.nextInt(50));
 			gb.add(oval);
 		}
 		
@@ -68,7 +66,7 @@ public class Example5 {
 						removed.add(next);
 					}
 				}
-				if (gb.getComponents().length == 0) {
+				if (gb.getComponents().length < 10) {
 					for (Component c : removed)
 						gb.add(c);
 					removed.clear();

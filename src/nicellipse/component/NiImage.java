@@ -1,7 +1,9 @@
 package nicellipse.component;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Shape;
 
 import javax.swing.JComponent;
@@ -12,19 +14,20 @@ public class NiImage extends JComponent implements NiBasicComponent {
 
 	public NiImage(Image image) {
 		this.image = image;
-		int width          = this.image.getWidth(null);
-		int height         = this.image.getHeight(null);
-		this.setBounds(0,0,width,height);
+		int width = this.image.getWidth(null);
+		int height = this.image.getHeight(null);
+		this.setSize(width, height);
+	}
+	
+	public Shape getClipShape() {
+		return new Rectangle(0,0,this.getWidth(), this.getHeight());
 	}
 
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Shape previousClip = g.getClip();
-		
-		g.setClip(this.getClipShape());
-		g.translate(getX(), getY());
-		g.drawImage(this.image, 0, 0, null);
-		g.translate(-getX(), -getY());
-		g.setClip(previousClip);
+		Graphics2D g2d = (Graphics2D) g.create();
+		super.paintComponent(g2d);
+		g2d.clip(this.getClipShape());
+		g2d.drawImage(this.image, 0, 0, null);
+		g2d.dispose();
 	}
 }

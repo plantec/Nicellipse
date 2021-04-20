@@ -5,8 +5,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
+import java.awt.geom.Area;
 import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Point2D;
 
@@ -29,7 +31,7 @@ public class NiCubicCurve extends JComponent implements NiBasicComponent {
 	public Color defaultColor() {
 		return Color.magenta;
 	}
-	
+
 	public void moveTo(int x, int y) {
 		Point2D from = curve.getP1();
 		Point2D to = curve.getP2();
@@ -44,33 +46,41 @@ public class NiCubicCurve extends JComponent implements NiBasicComponent {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-		Stroke previousStroke = g2d.getStroke();
-		Color previousColor = g2d.getColor();
-		Shape previousClip = g.getClip();
-		
-		g2d.setStroke(this.stroke);
-		g2d.setColor(this.color);
-		g.translate(-getX(), -getY());
-		g.setClip(this.getClipShape());
-		
-		g2d.draw(this.curve);
-		
-		g.setClip(previousClip);
-		g.translate(getX(), getY());
-		g2d.setColor(previousColor);
-		g2d.setStroke(previousStroke);
+		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.setColor(this.getBackground());
+		g2d.translate(-getX(), -getY());
+		Rectangle gcr = new Rectangle();
+
+		g2d.getClipBounds(gcr);
+		Shape cr = this.getClipShape();
+		if (cr.intersects(gcr)) {
+			Area area1;
+			Area area2;
+			area1 = new Area(gcr);
+			area2 = new Area(cr);
+			area1.intersect(area2);
+			g2d.setClip(area1);
+			g2d.setStroke(this.stroke);
+			g2d.setColor(this.color);
+
+			g2d.draw(this.curve);
+		}
+
+		g2d.dispose();
 	}
-	
 
 	public void setStroke(Stroke stroke) {
 		this.stroke = stroke;
 	}
 
+	public void setStrokeWidth(float w) {
+		this.setStroke(new BasicStroke(w, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_ROUND));
+	}
+
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
+
 	public void setWidth(float w) {
 		setStroke(new BasicStroke(w));
 	}

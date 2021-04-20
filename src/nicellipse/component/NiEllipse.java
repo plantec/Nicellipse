@@ -1,10 +1,11 @@
 package nicellipse.component;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
@@ -19,7 +20,6 @@ public class NiEllipse extends JComponent implements NiBorderedComponent {
 	Stroke stroke;
 	boolean withBorder;
 	private Ellipse2D ellipse;
-	private Rectangle clipRect = new Rectangle();
 
 	public NiEllipse() {
 		this.defaultSetup();
@@ -36,32 +36,36 @@ public class NiEllipse extends JComponent implements NiBorderedComponent {
 
 	public void setBounds(int x, int y, int w, int h) {
 		super.setBounds(x, y, w, h);
-		this.ellipse = new Ellipse2D.Double(x, y, w, h);
+		this.ellipse = new Ellipse2D.Double(0, 0, w, h);
 	}
 
 	public Shape getClipShape() {
 		return this.ellipse;
 	}
 
-	protected void paintComponent(Graphics g) {
+	public void paint(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.clip(this.getClipShape());
+		super.paint(g2d);
+		g2d.dispose();
+	}
+
+	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
 		g2d.setColor(this.getBackground());
-		g2d.translate(-getX(), -getY());
+		super.paintComponent(g2d);
 
-		g2d.getClipBounds(clipRect);
-		Rectangle bnds = this.getBounds();
-		if (bnds.intersects(clipRect)) {
-			//g2d.setClip(this.getClipShape());
-
-			g2d.fill(ellipse);
-			if (this.withBorder) {
-				g2d.setColor(this.borderColor);
-				g2d.setStroke(this.stroke);
-				g2d.draw(this.ellipse);
-			}
+		g2d.fill(ellipse);
+		if (this.withBorder) {
+			g2d.setColor(this.borderColor);
+			g2d.setStroke(this.stroke);
+			g2d.draw(this.ellipse);
 		}
-
 		g2d.dispose();
+	}
+
+	public void setDimension(Dimension dim) {
+		this.setBounds(this.getX(), this.getY(), (int) dim.getWidth(), (int) dim.getHeight());
 	}
 
 	public void setBorderColor(Color borderColor) {
@@ -70,6 +74,10 @@ public class NiEllipse extends JComponent implements NiBorderedComponent {
 
 	public void setStroke(Stroke stroke) {
 		this.stroke = stroke;
+	}
+
+	public void setStrokeWidth(float w) {
+		this.setStroke(new BasicStroke(w, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_ROUND));
 	}
 
 	public void setWithBorder(Boolean withBorder) {
