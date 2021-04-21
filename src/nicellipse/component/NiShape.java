@@ -4,12 +4,9 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Stroke;
-import java.awt.geom.CubicCurve2D;
 
 import javax.swing.JComponent;
 
@@ -17,6 +14,19 @@ public class NiShape extends JComponent implements NiBasicComponent {
 	private static final long serialVersionUID = -3829818147581275076L;
 	Shape shape;
 	Stroke stroke;
+	Boolean fill = true;
+	Boolean outline = true;
+	
+	public void doFilling(Boolean f) {
+		if (f == this.fill) return;
+		this.fill = f;
+		this.repaint();
+	}
+	public void doOutline(Boolean o) {
+		if (o == this.outline) return;
+		this.outline = o;
+		this.repaint();
+	}
 	
 	public Shape defaultShape() {
 		return new Rectangle(0,0,40,40);
@@ -54,35 +64,37 @@ public class NiShape extends JComponent implements NiBasicComponent {
 		this.setForeground(this.defaultForeground());
 		this.setLayout(null);
 		stroke = this.defaultStroke();
+		this.updateSize();
+	}
+	
+	private void updateSize() {
 		Rectangle r = this.shape.getBounds();
-		this.setBounds(r);
+		this.setSize(r.width+r.x, r.height+r.y);
 		this.setPreferredSize(this.getSize());
 	}
 	
-	public void setUp() {
-		this.setBounds(this.shape.getBounds());
-		this.setPreferredSize(this.getSize());
+	protected void setUp() {
+		this.updateSize();
 	}
 	
-	@Override
-	public void paint(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g.create();
-		g2d.translate(-this.getX(), -this.getY());
-		g2d.clip(this.getClipShape());
-		super.paint(g2d);
-		g2d.dispose();
+	public void refresh() {
+		this.setUp();
 	}
-	
+		
 	@Override
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		if (!(this.fill || this.outline)) return;
 		Graphics2D g2d = (Graphics2D) g.create();
-		g2d.clip(this.getClipShape());
-		super.paintComponent(g2d);
-		g2d.setColor(this.getBackground());
-		g2d.setStroke(this.stroke);
-		g2d.fill(this.shape);
-		g2d.setColor(this.getForeground());
-		g2d.draw(this.shape);
+		if (this.fill) {
+			g2d.setColor(this.getBackground());
+			g2d.fill(this.shape);
+		}
+		if (this.outline) {
+			g2d.setColor(this.getForeground());
+			g2d.setStroke(this.stroke);
+			g2d.draw(this.shape);
+		}
 		g2d.dispose();
 	}
 	

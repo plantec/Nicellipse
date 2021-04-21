@@ -8,15 +8,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Line2D;
 
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
 import nicellipse.component.NiEllipse;
 import nicellipse.component.NiLabel;
-import nicellipse.component.NiLine;
 import nicellipse.component.NiPolyLine;
 import nicellipse.component.NiRectangle;
+import nicellipse.component.NiShape;
 import nicellipse.component.NiSpace;
 
 public class Example7 implements MouseListener {
@@ -58,11 +59,11 @@ public class Example7 implements MouseListener {
 		s.setLocation(20, 80);
 		subContainer.add(s);
 
-		NiLine line = new NiLine(new Point(10, 30), new Point(500, 30));
-		line.setColor(Color.black);
-		line.setStrokeWidth(3);
-		subContainer.add(line);
-
+		Line2D line = new Line2D.Double(20,30,350,30);
+		NiShape shape7 = new NiShape(line);
+		shape7.setStrokeWidth(10);
+		container.add(shape7);
+		
 		NiPolyLine pline = new NiPolyLine();
 		pline.setStrokeWidth(8);
 		pline.addPoint(new Point(5, 140));

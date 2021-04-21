@@ -41,12 +41,6 @@ public class NiPolyLine extends JComponent implements NiBasicComponent {
 		points.remove(p);
 	}
 
-	public void paint(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g.create();
-		super.paint(g2d);
-		g2d.dispose();
-	}
-		
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();

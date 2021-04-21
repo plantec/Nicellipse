@@ -7,12 +7,14 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.geom.Arc2D;
+import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 
 import nicellipse.component.NiEllipse;
 import nicellipse.component.NiLabel;
 import nicellipse.component.NiPolyLine;
-import nicellipse.component.NiPolygon;
 import nicellipse.component.NiRectangle;
 import nicellipse.component.NiShape;
 import nicellipse.component.NiSpace;
@@ -79,22 +81,45 @@ public class Example2 {
 		shape2.setBackground(Color.gray);
 		space.add(shape2);
 		
-		/*
-		int xPoly[] = {150,250,325,375,450,275,100};
-        int yPoly[] = {150,100,125,225,250,375,300};
+		int xPoly[] = {50,150,225,275,350,175,0};
+        int yPoly[] = {50,0,25,125,150,275,200};
         Polygon polygon = new Polygon(xPoly, yPoly, xPoly.length);
 		NiShape shape3 = new NiShape(polygon);
-		shape3.setStroke(new BasicStroke(5));
+		shape3.setStroke(new BasicStroke(10));
+		shape3.setForeground(Color.yellow);
 		shape3.setBackground(Color.blue);
-		*/
-		int xPoly[] = {150,250,325,375,450,275,100};
-        int yPoly[] = {150,100,125,225,250,375,300};
+		space.add(shape3);
 
-		NiPolygon poly = new NiPolygon(xPoly, yPoly);
-		poly.setForeground(Color.black);
-		space.add(poly);
+		Arc2D arc = new Arc2D.Float(0, 0, 200, 200, 90, 90, Arc2D.PIE);
+		NiShape shape4 = new NiShape(arc);
+		shape4.setForeground(Color.black);
+		shape4.setBackground(Color.red);
+		shape4.setStroke(new BasicStroke(5));
+		space.add(shape4);
+		
+		Line2D line = new Line2D.Double(new Point(0,0), new Point(100,100));
+		NiShape shape5 = new NiShape(line);
+		shape5.setForeground(Color.black);
+		shape5.setBackground(Color.red);
+		shape5.setStroke(new BasicStroke(5));
+		space.add(shape5);
+		
+		CubicCurve2D curve = new CubicCurve2D.Double(5, 5, 400, 40, 175, 250, 500, 5);
+		NiShape shape6 = new NiShape(curve);
+		shape5.setStroke(new BasicStroke(4));
+		space.add(shape6);
+		
+		NiPolyLine pline = new NiPolyLine();
+		for (int i = 0; i < xPoly.length; i++)
+			pline.addPoint(new Point(xPoly[i], yPoly[i]));
+		pline.setStroke(new BasicStroke(4));
+		pline.setSize(400,400);
+		pline.setPreferredSize(pline.getSize());
+		space.add(pline);
+		
 		
 		space.openInWindow();
+		space.repaint();
 		
 		
 	

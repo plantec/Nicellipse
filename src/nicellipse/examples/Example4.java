@@ -1,13 +1,16 @@
 package nicellipse.examples;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
-import nicellipse.component.NiCubicCurve;
+import java.awt.geom.CubicCurve2D;
+import java.awt.geom.Line2D;
+
 import nicellipse.component.NiEllipse;
-import nicellipse.component.NiLine;
 import nicellipse.component.NiPolyLine;
 import nicellipse.component.NiRectangle;
+import nicellipse.component.NiShape;
 import nicellipse.component.NiSpace;
 
 public class Example4 {
@@ -15,18 +18,16 @@ public class Example4 {
 		
 		NiSpace space = new NiSpace("Some components", new Dimension(800,600));
 
-		Point start = new Point(5, 5); 
-		Point control1 = new Point(400, 40);
-		Point control2 = new Point(175, 250);
-		Point end = new Point(800, 5);
-		NiCubicCurve curve = new NiCubicCurve(start, control1, control2, end);
-		curve.setStrokeWidth(10);
-		space.add(curve);
+		CubicCurve2D curve = new CubicCurve2D.Double(5, 5, 400, 40, 175, 250, 500, 5);
+		NiShape shape6 = new NiShape(curve);
+		shape6.setStroke(new BasicStroke(4));
+		shape6.doFilling(false);
+		space.add(shape6);
 
-		NiLine line = new NiLine(new Point(10,10), new Point(2000,500));
-		line.setColor(Color.black);
-		line.setStrokeWidth(20);
-		space.add(line);
+		Line2D line = new Line2D.Double(10,10,2000,500);
+		NiShape shape7 = new NiShape(line);
+		shape7.setStrokeWidth(5);
+		space.add(shape7);
 		
 		
 		NiEllipse ellipse = new NiEllipse();
