@@ -23,7 +23,7 @@ public class Example6 {
 		
 		NiRectangle container = new NiRectangle();
 		container.setBackground(Color.white);
-		container.setDimension(new Dimension(900,300));
+		container.setSize(new Dimension(900,300));
 		container.setLocation(50, 50);
 		label = new NiLabel("container " + container.getWidth() + "x" + container.getHeight() );
 		label.setForeground(Color.red);
@@ -33,7 +33,7 @@ public class Example6 {
 		NiRectangle subContainer = new NiRectangle();
 		subContainer.setBackground(Color.black);
 		subContainer.setLocation(new Point(30,50));
-		subContainer.setDimension(new Dimension(700,200));
+		subContainer.setSize(new Dimension(700,200));
 		subContainer.setBorder(BorderFactory.createLineBorder(Color.red, 4));
 		label = new NiLabel("subContainer " + subContainer.getWidth() + "x" + subContainer.getHeight() );
 		label.setForeground(Color.white);
@@ -44,7 +44,7 @@ public class Example6 {
 		NiRectangle subsubContainer = new NiRectangle();
 		subsubContainer.setBackground(Color.white);
 		subsubContainer.setLocation(new Point(50,50));
-		subsubContainer.setDimension(new Dimension(600,120));
+		subsubContainer.setSize(new Dimension(600,120));
 		NiLabel animLabel = new NiLabel("subsubContainer " + subsubContainer.getWidth() + "x" + subsubContainer.getHeight() );
 		animLabel.setForeground(Color.blue);
 		animLabel.setBorder(BorderFactory.createLineBorder(Color.lightGray, 2));

@@ -38,7 +38,7 @@ public class NiEllipse extends JComponent implements NiBorderedComponent {
 		super.setBounds(x, y, w, h);
 		this.ellipse = new Ellipse2D.Double(0, 0, w, h);
 	}
-
+	
 	public Shape getClipShape() {
 		return this.ellipse;
 	}
@@ -54,7 +54,6 @@ public class NiEllipse extends JComponent implements NiBorderedComponent {
 		Graphics2D g2d = (Graphics2D) g.create();
 		g2d.setColor(this.getBackground());
 		super.paintComponent(g2d);
-
 		g2d.fill(ellipse);
 		if (this.withBorder) {
 			g2d.setColor(this.borderColor);
@@ -62,10 +61,6 @@ public class NiEllipse extends JComponent implements NiBorderedComponent {
 			g2d.draw(this.ellipse);
 		}
 		g2d.dispose();
-	}
-
-	public void setDimension(Dimension dim) {
-		this.setBounds(this.getX(), this.getY(), (int) dim.getWidth(), (int) dim.getHeight());
 	}
 
 	public void setBorderColor(Color borderColor) {

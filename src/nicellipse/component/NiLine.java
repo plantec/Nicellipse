@@ -14,7 +14,6 @@ import javax.swing.JComponent;
 public class NiLine extends JComponent implements NiBasicComponent {
 	private static final long serialVersionUID = -1617090627730247010L;
 	Stroke stroke;
-	Color color;
 	Line2D line;
 
 	public Color defaultColor() {
@@ -24,7 +23,7 @@ public class NiLine extends JComponent implements NiBasicComponent {
 	public NiLine(Point from, Point to) {
 		this.line = new Line2D.Double(from, to);
 		this.stroke = new BasicStroke(1, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_ROUND);
-		this.color = this.defaultColor();
+		this.setForeground(this.defaultColor());
 		Rectangle bnds = this.line.getBounds();
 		Point loc = bnds.getLocation();
 		this.setBounds(loc.x, loc.y, bnds.width, bnds.height);
@@ -37,13 +36,11 @@ public class NiLine extends JComponent implements NiBasicComponent {
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g.create();
-		g2d.setColor(this.getBackground());
+		g2d.setColor(this.getForeground());
 		g2d.clip(this.getClipShape());
 		g2d.setStroke(this.stroke);
-		g2d.setColor(this.color);
-
+		super.paintComponent(g2d);
 		g2d.draw(this.line);
-
 		g2d.dispose();
 	}
 
@@ -52,7 +49,7 @@ public class NiLine extends JComponent implements NiBasicComponent {
 	}
 
 	public void setColor(Color color) {
-		this.color = color;
+		this.setForeground(color);
 	}
 
 	public void setStrokeWidth(float w) {

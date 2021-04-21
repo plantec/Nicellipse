@@ -2,18 +2,15 @@ package nicellipse.examples;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import nicellipse.component.NiEllipse;
 import nicellipse.component.NiImage;
 import nicellipse.component.NiSpace;
 
 public class Example1 {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		NiSpace space = new NiSpace("Space with circles", new Dimension(400, 400));
 				
 		NiEllipse circle = new NiEllipse();
@@ -26,20 +23,14 @@ public class Example1 {
 		inner.setBackground(Color.yellow);
 		circle.add(inner);
 		
-		File path = new File("I_love_Brest_city.jpg");
-		BufferedImage rawImage = null;
-		try {
-			rawImage = ImageIO.read(path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		NiImage image = new NiImage(rawImage);
+		NiImage image = new NiImage(new File("I_love_Brest_city.jpg"));
 		image.setCenter(circle.getCenter());
 		circle.add(image);
 		
 		space.setBackground(Color.lightGray);
 		space.openInWindow();
+		
+		circle.setCenter(space.getCenter());
 	}
 
 }

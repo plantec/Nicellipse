@@ -34,19 +34,19 @@ public class Example7 implements MouseListener {
 		NiRectangle container = new NiRectangle();
 		container.setBackground(Color.white);
 		container.setLocation(new Point(20, 20));
-		container.setDimension(new Dimension(400, 380));
+		container.setSize(new Dimension(400, 380));
 		space.add(container);
 
 		NiEllipse subContainer = new NiEllipse();
 		subContainer.setBackground(Color.red);
-		subContainer.setDimension(new Dimension(300, 300));
+		subContainer.setSize(300, 300);
 		container.add(subContainer);
 		subContainer.setCenter(container.getCenter());
 
 		subContainer.addMouseListener(this);
 
 		NiEllipse cercle = new NiEllipse();
-		cercle.setDimension(new Dimension(60,60));
+		cercle.setSize(60,60);
 		cercle.setBackground(Color.yellow);
 		subContainer.add(cercle);
 		cercle.setCenter(subContainer.getCenter());
@@ -116,7 +116,7 @@ public class Example7 implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		JComponent src = (JComponent) e.getSource();
 		NiEllipse clickArea = new NiEllipse();
-		clickArea.setDimension(new Dimension(20, 20));
+		clickArea.setSize(20, 20);
 		Point p = e.getPoint();
 		clickArea.setCenter(p);
 		clickArea.setBackground(Color.lightGray);

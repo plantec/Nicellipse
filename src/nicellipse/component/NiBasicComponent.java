@@ -8,18 +8,37 @@ import java.awt.Shape;
 
 public interface NiBasicComponent {
 
-	void setBackground(Color defaultBackground);
+	void setBackground(Color background);
+
+	void setForeground(Color foreground);
+
+	void setLayout(LayoutManager m);
+
+	void setBounds(int x, int y, int w, int h);
+
+	int getWidth();
+
+	int getHeight();
+
+	Point getLocation();
+
+	void setLocation(Point p);
+
+	public Rectangle getBounds();
 
 	default Color defaultBackground() {
-		return Color.blue;
+		return Color.lightGray;
+	}
+
+	default Color defaultForeground() {
+		return Color.black;
 	}
 
 	default void defaultSetup() {
 		this.setBackground(this.defaultBackground());
+		this.setForeground(this.defaultForeground());
 		this.setLayout(null);
 	}
-
-	void setLayout(LayoutManager m);
 
 	default Shape getClipShape() {
 		return this.getBounds();
@@ -31,8 +50,6 @@ public interface NiBasicComponent {
 		this.setBounds(c.x, c.y, this.getWidth(), this.getHeight());
 	}
 
-	void setBounds(int x, int y, int w, int h);
-
 	default Point getCenter() {
 		Rectangle bnds = this.getBounds();
 		Point c = new Point((int) bnds.getCenterX(), (int) bnds.getCenterY());
@@ -40,14 +57,4 @@ public interface NiBasicComponent {
 		c.translate(-l.x, -l.y);
 		return c;
 	}
-
-	int getWidth();
-
-	int getHeight();
-
-	Point getLocation();
-	void setLocation(Point p);
-
-	public Rectangle getBounds();
-
 }

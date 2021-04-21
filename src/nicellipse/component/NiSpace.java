@@ -32,6 +32,7 @@ public class NiSpace extends JPanel implements NiBasicComponent {
 			}
 		};
 		frame.addWindowListener(wa);
+		frame.getContentPane().setSize(this.getSize());
 		frame.getContentPane().add(this);
 		frame.pack();
 		frame.setVisible(true);

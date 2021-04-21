@@ -23,7 +23,7 @@ public class Example4 {
 		curve.setStrokeWidth(10);
 		space.add(curve);
 
-		NiLine line = new NiLine(new Point(10,10), new Point(700,500));
+		NiLine line = new NiLine(new Point(10,10), new Point(2000,500));
 		line.setColor(Color.black);
 		line.setStrokeWidth(20);
 		space.add(line);
