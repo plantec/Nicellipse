@@ -22,7 +22,6 @@ public class Example5 {
 		Random x = new Random();
 		NiSpace space = new NiSpace("It makes me mad", new Dimension(800, 600));
 		NiRectangle gb = new NiRectangle();
-		gb.setLayout(null);
 		gb.setBounds(10, 10, 780, 580);
 		gb.setBackground(Color.lightGray);
 

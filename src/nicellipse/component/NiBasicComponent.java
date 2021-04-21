@@ -26,7 +26,7 @@ public interface NiBasicComponent {
 
 	public Rectangle getBounds();
 
-	default Color defaultBackground() {
+	default  Color defaultBackground() {
 		return Color.lightGray;
 	}
 

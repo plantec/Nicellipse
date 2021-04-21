@@ -67,7 +67,7 @@ public class NiShape extends JComponent implements NiBasicComponent {
 		this.updateSize();
 	}
 	
-	private void updateSize() {
+	protected void updateSize() {
 		Rectangle r = this.shape.getBounds();
 		this.setSize(r.width+r.x, r.height+r.y);
 		this.setPreferredSize(this.getSize());

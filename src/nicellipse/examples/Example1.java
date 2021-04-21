@@ -27,7 +27,9 @@ public class Example1 {
 		image.setCenter(circle.getCenter());
 		circle.add(image);
 		
-		space.setBackground(Color.lightGray);
+		
+		space.setBackground(Color.blue);
+		space.setOpaque(false);
 		space.openInWindow();
 		
 		circle.setCenter(space.getCenter());
