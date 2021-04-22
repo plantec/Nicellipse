@@ -1,6 +1,5 @@
 package nicellipse.examples;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -19,7 +18,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import nicellipse.component.NiEllipse;
-import nicellipse.component.NiLabel;
 import nicellipse.component.NiRectangle;
 import nicellipse.component.NiSpace;
 
