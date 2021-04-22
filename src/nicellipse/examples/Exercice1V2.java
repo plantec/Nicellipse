@@ -17,7 +17,7 @@ public class Exercice1V2 {
 	public Exercice1V2() {
 		space.setBackground(Color.lightGray);
 		robi.setBackground(Color.red);
-		robi.setSize(20,20);
+		robi.setSize(60,60);
 		space.add(robi);
 
 		space.openInWindow();
