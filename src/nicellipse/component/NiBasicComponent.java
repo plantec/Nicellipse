@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.LayoutManager;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Dimension;
 import java.awt.Shape;
 
 public interface NiBasicComponent {
@@ -49,7 +50,12 @@ public interface NiBasicComponent {
 		c.translate(-(this.getWidth() / 2), -(this.getHeight() / 2));
 		this.setBounds(c.x, c.y, this.getWidth(), this.getHeight());
 	}
-
+	
+	default void setDimension(Dimension dim) {
+		Point p = this.getLocation();
+		this.setBounds(p.x, p.y, (int)dim.getWidth(), (int)dim.getHeight());
+	}
+	
 	default Point getCenter() {
 		Rectangle bnds = this.getBounds();
 		Point c = new Point((int) bnds.getCenterX(), (int) bnds.getCenterY());

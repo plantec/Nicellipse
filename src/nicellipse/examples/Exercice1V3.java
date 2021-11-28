@@ -28,7 +28,6 @@ public class Exercice1V3 {
 	Timer animation;
 	NiEllipse robi = new NiEllipse();
 	NiRectangle robiHome = new NiRectangle();
-	NiSpace space = new NiSpace("The robi run", new Dimension(500, 500));
 	JLabel roundCounterLabel = new JLabel("0");
 	Integer roundCounter = 0;
 
@@ -77,7 +76,6 @@ public class Exercice1V3 {
 					animation.setInitialDelay(newDelay * 10);
 				}
 			}
-
 		});
 
 		// Turn on labels at major tick marks.
@@ -128,19 +126,19 @@ public class Exercice1V3 {
 	}
 
 	public Exercice1V3() {
+		NiSpace space = new NiSpace("The robi run", new Dimension(500, 500));
 		this.setupAnimation();		
-		robi.setSize(30, 30);
-		robiHome.setBackground(Color.white);
-		robiHome.add(robi);
+		this.robi.setSize(30, 30);
+		this.robiHome.setBackground(Color.white);
+		this.robiHome.add(robi);
 
 		// Lay out from top to bottom. everything.
 		// Do not have to set the size of space
 		// because its size is automatically set by its layout
 		space.setLayout(new BoxLayout(space, BoxLayout.Y_AXIS));
-		space.add(robiHome);
+		space.add(this.robiHome);
 		space.add(this.buttonPanel());
 		space.openInWindow();
-
 	}
 
 	public static void main(String[] args) {
