@@ -16,6 +16,7 @@ import nicellipse.component.NiRectangle;
 import nicellipse.component.NiSpace;
 
 
+// Model 
 class Something {
 	Point pos;
 	
@@ -34,7 +35,7 @@ class Something {
 	}
 }
 
-
+// View : it knows its model
 class SomethingView extends NiEllipse {
 	private static final long serialVersionUID = 8010266472160477056L;
 	Something thing;
@@ -52,6 +53,7 @@ class SomethingView extends NiEllipse {
 }
 
 
+// The animation spec
 class GraphicAnimation implements ActionListener {
 	final int graphicAnimationDelay = 10;
 	NiRectangle home;
@@ -77,6 +79,7 @@ class GraphicAnimation implements ActionListener {
 	
 }
 
+// The main app
 public class MovingThings {
 	ArrayList<Something> population;
 	final int populationSize = 2000;
