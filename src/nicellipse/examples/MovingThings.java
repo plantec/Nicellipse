@@ -100,7 +100,6 @@ class GraphicAnimation implements ActionListener {
 // The main app
 public class MovingThings {
 	ArrayList<Something> population;
-	int populationSize = 5000;
 	NiRectangle home;
 	GraphicAnimation grAnimation;
 	final int FPS_MIN = 2;
