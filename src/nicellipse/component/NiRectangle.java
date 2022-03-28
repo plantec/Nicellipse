@@ -1,5 +1,7 @@
 package nicellipse.component;
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 
 public class NiRectangle extends JPanel implements NiBorderedComponent {
@@ -7,6 +9,7 @@ public class NiRectangle extends JPanel implements NiBorderedComponent {
 
 	public NiRectangle() {
 		this.defaultSetup();
+		this.setDimension(new Dimension(20,20));
 		this.setLayout(null);
 	}
 	
